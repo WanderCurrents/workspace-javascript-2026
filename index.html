@@ -23,31 +23,56 @@
             <p>
                 Please display a hello world message in JavaScript. 
                 <script>
-                    document.title = "JavaScript Basic -- In class practice -- Yilian Zhang";
+                    document.title = "JavaScript Basic -- In class practice -- Andrew Stevens";
                     // use document.write to display a message
-                    
+                    document.write("Welcome to my <b>JavaScript</b>");
                     // use console.log to display a message   
-                  
+                    console.log("This is for debugging");
                     
                 </script>
             </p>
             <p> Please import external file hello.js here. 
-                
+                <script src="js/hello.js"></script>
             </p>
         </div>
 
         <div class="practice">
             <h1> Variable and Arithemetic Operation</h1>
             <p> Practice on variables </p>
+            <script>
+                var a = 20;
+                var b = 10;
+                var c;
+                var e;
+                var d;
+                c = a + b;
+                e = a * b;
+                d = a / b;
+                f = a - b;
+                document.write("a + b = " + c);
+                document.write("\na * b = " + e);
+                document.write("\na / b = " + d);
+                document.write("\na - b = " + f);
 
+                a = "fifteen";
+                c = a - b;
+                document.write("\nChanged the type of a ?? " + c)
+            </script>
 
         </div>
 
         <div class="practice">
             <h1> JavaScript Escape Sequence</h1>
             <p> Write an image to the page </p>
-
+            <script>
+                document.write("<img src=\"img/die1.png\">");
+                // or
+                // document.write("<img src='img/die1.png'>");
+            </script>
             <p> Write a table to the page </p>
+            <script>
+                document.write("<table border=\"1\"> <tr> <td>1</td> <td>2</td></table>")
+            </script>
 
         </div>
 
@@ -55,7 +80,16 @@
             <h1>Window and Document Object </h1>
             <p> Try alert, open, location, url </p>
             <script>
+                console.log("Document was last modified on: " + document.lastModified);
+                console.log("Document referrer information: " + document.referrer);
+                console.log("Document title: " + document.title);
+                console.log("All of the JS related to document: " + document.scripts);
 
+                // window.alert("Haha, this is funny popup");
+                // window.open("https://www.usca.edu");
+                console.log("Current window location: " + window.location);
+                // window.location.assign("http://www.aaamath.com/add26ax1.htm");
+                
             </script>
 
         </div>
