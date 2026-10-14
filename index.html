@@ -109,8 +109,13 @@
             <p id="p2"> Paragraph Number two </p>
             <p id="p3"> Paragraph Number three </p>
             <p>Please write JavaScript code to change the content of each paragraph.​
-            <p>
-
+            </p>
+            <script>
+                document.getElementById('p1').textContent="<b>I am changed</b>";   //This is one way to change it, notice bold doesnt work (bc its just text content)
+                document.getElementById('p2').innerHTML="<b>I am changed, but different</b>";   //This fixes the issue seen above
+                document.getElementById('p3').innerText="<b>I am changed, but even more different</b>";   //Same as textContent but is aware of CSS styling
+                
+            </script>
 
         </div>
 
@@ -119,11 +124,14 @@
             <p> Please enter your numbers </p>
             <script>
                 function calculate() {
+                    var num1 = parseFloat(document.getElementById('formNum1').value);
+                    var num2 = parseFloat(document.getElementById('formNum2').value);
 
-
+                    var total = num1 + num2;
+                    document.getElementById('result').textContent = total;
                 }
             </script>
-            <p> <input type="text" name="addnum1" /> + <input type="text" name="num2">
+            <p> <input type="text" name="addnum1" id="formNum1"/> + <input type="text" name="num2" id="formNum2">
                 <input type="button" value="=" onclick="calculate();">
                 <label id="result"> ? </label>
             </p>
@@ -138,11 +146,28 @@
                         <input type="text" id="cName">
                     </label>
                 </p>
-
-                <p id="message">
+                <!-- When you leave this /\ element write something to \/ element -->
+                <p id="message1">
 
                 </p>
+                
+                <script>
+                    function checkName() {
+                        // Here you hypothetically would call the database and make sure name is valid
 
+                        var name = document.getElementById('cName').value;
+                        document.getElementById("message1").textContent = "Welcome " + name;
+                    }
+                    // get element
+                    var iE = document.getElementById("cName");
+                    // associate the event with action (listener)
+                    iE.addEventListener("blur", checkName, false);
+                    // Experimenting (2 MORE ACTIONS REQUIRED EXERCISE)
+                    // iE.addEventListener("change", checkName, false); //Requires change and press enter to activate
+                    // iE.addEventListener("click", checkName, false); //Requires user to click in field to activate
+
+                </script>
+                
                 <p>
                     <label> Email:
                         <input type="text" id="cEmail">
