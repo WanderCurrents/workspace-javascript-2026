@@ -14,24 +14,24 @@
 <body>
     <div class="wrapper">
         <div class="panelLeft">
-            
+
         </div>
 
         <div class="practice">
             <h1>Hello world in JavaScript
             </h1>
             <p>
-                Please display a hello world message in JavaScript. 
+                Please display a hello world message in JavaScript.
                 <script>
                     document.title = "JavaScript Basic -- In class practice -- Andrew Stevens";
                     // use document.write to display a message
                     document.write("Welcome to my <b>JavaScript</b>");
                     // use console.log to display a message   
                     console.log("This is for debugging");
-                    
+
                 </script>
             </p>
-            <p> Please import external file hello.js here. 
+            <p> Please import external file hello.js here.
                 <script src="js/hello.js"></script>
             </p>
         </div>
@@ -89,7 +89,7 @@
                 // window.open("https://www.usca.edu");
                 console.log("Current window location: " + window.location);
                 // window.location.assign("http://www.aaamath.com/add26ax1.htm");
-                
+
             </script>
 
         </div>
@@ -111,10 +111,10 @@
             <p>Please write JavaScript code to change the content of each paragraph.​
             </p>
             <script>
-                document.getElementById('p1').textContent="<b>I am changed</b>";   //This is one way to change it, notice bold doesnt work (bc its just text content)
-                document.getElementById('p2').innerHTML="<b>I am changed, but different</b>";   //This fixes the issue seen above
-                document.getElementById('p3').innerText="<b>I am changed, but even more different</b>";   //Same as textContent but is aware of CSS styling
-                
+                document.getElementById('p1').textContent = "<b>I am changed</b>";   //This is one way to change it, notice bold doesnt work (bc its just text content)
+                document.getElementById('p2').innerHTML = "<b>I am changed, but different</b>";   //This fixes the issue seen above
+                document.getElementById('p3').innerText = "<b>I am changed, but even more different</b>";   //Same as textContent but is aware of CSS styling
+
             </script>
 
         </div>
@@ -131,7 +131,7 @@
                     document.getElementById('result').textContent = total;
                 }
             </script>
-            <p> <input type="text" name="addnum1" id="formNum1"/> + <input type="text" name="num2" id="formNum2">
+            <p> <input type="text" name="addnum1" id="formNum1" /> + <input type="text" name="num2" id="formNum2">
                 <input type="button" value="=" onclick="calculate();">
                 <label id="result"> ? </label>
             </p>
@@ -150,7 +150,7 @@
                 <p id="message1">
 
                 </p>
-                
+
                 <script>
                     function checkName() {
                         // Here you hypothetically would call the database and make sure name is valid
@@ -162,12 +162,13 @@
                     var iE = document.getElementById("cName");
                     // associate the event with action (listener)
                     iE.addEventListener("blur", checkName, false);
-                    // Experimenting (2 MORE ACTIONS REQUIRED EXERCISE)
+                    // Experimenting (MORE ACTIONS REQUIRED EXERCISE)
                     // iE.addEventListener("change", checkName, false); //Requires change and press enter to activate
                     // iE.addEventListener("click", checkName, false); //Requires user to click in field to activate
+                    // iE.addEventListener("keyup", checkName, false); 
 
                 </script>
-                
+
                 <p>
                     <label> Email:
                         <input type="text" id="cEmail">
@@ -182,21 +183,50 @@
             Calculating Square:
             <input type="text" id="squarenum" placeholder="Type in a number"> <sup> 2 </sup> =
             <label id="squareresult"> ? </label>
+            <script>
+                function calcSquare() {
+                    const input = document.getElementById("squarenum");
 
+                    const value = Number(input.value);
+                    if (isNaN(value)) {
+                        console.log("WARNING! Not a number entered");
+                        document.getElementById("squareresult").textContent = "Invalid entry";
+                    }
+                    else {
+                        document.getElementById("squareresult").textContent = value * value;
+                    }
+
+                }
+
+
+                const input = document.getElementById("squarenum");
+                input.addEventListener("change", calcSquare, false);
+            </script>
         </div>
 
         <div class="practice">
             <h1> Difference between textcontent and innerHTML</h1>
             <p> HTML Try it Editor </p>
             <p>ENTER your code </p>
-            <textarea cols="40" rows="20" id="code">  
+            <textarea cols="40" rows="20" id="code">
 
             </textarea>
 
-            <input type="button" id="tryit" value="Click and Display"> 
+            <input type="button" id="tryit" value="Click and Display">
 
-            <div id="innerHTMLmessage"> 
+            <div id="innerHTMLmessage">
             </div>
+
+            <script>
+                function displayHTML() {
+                    let code = document.getElementById("code").value;
+                    const messageE = document.getElementById("innerHTMLmessage");
+                    messageE.innerHTML = code;
+                }
+                // Event --- action
+                const bE = document.getElementById("tryit");
+                bE.addEventListener('click', displayHTML, false);
+            </script>
 
 
         </div>
@@ -208,20 +238,56 @@
                 <select id="year">
                     <option> 2003</option>
                     <option> 2004</option>
-                </select>.</p>
+                </select>.
+            </p>
             <p>Please enter the condition of the car
                 <select id="condition">
                     <option> Fair</option>
                     <option> Good</option>
-                </select>.</p>
+                </select>.
+            </p>
 
             <p id="price">
 
             </p>
 
             <script type="text/javascript">
+                const yearE = document.getElementById('year');
+                const conditionE = document.getElementById('condition');
 
+                function getPrice() {
+                    // console.log("Value " + yearE.value);     //Give the value (String type)
+                    // console.log("Index " + yearE.selectedIndex);    //Finds index in array (Int type)
+                    let value = 0;
+                    let year = yearE.value;
+                    let condition = conditionE.value;
+                    // Could also use index instead of the values e.g. if(yearE.Index === 1) ...
+                    if (year === "2003") {
+                        if (condition === "Fair") {
+                            value = 2000;
+                        } else if (condition === "Good") {
+                            value = 2250;
+                        } else {
+                            console.log("Error, how did we get here?2");
+                        }
+                    } else if (year === "2004") {
+                        if (condition === "Fair") {
+                            value = 2200;
+                        } else if (condition === "Good") {
+                            value = 3000;
+                        } else {
+                            console.log("Error, how did we get here?3");
+                        }
+                    } else {
+                        console.log("Error, how did we get here?1")
+                    }
 
+                    document.getElementById('price').textContent = value;
+                }
+
+                // event --- action
+                yearE.addEventListener("change", getPrice, false);
+                conditionE.addEventListener("change", getPrice, false);
 
             </script>
 
@@ -229,10 +295,48 @@
 
         <div class="practice">
             <h1> Decision Statement - Switch</h1>
-            <p> Choose your favorite theme(warm, cool, hot)
+            <p> Choose your favorite theme(warm, cool, hot, dark, nature, purp, really hot)
                 <input type="text" id="theme">
             </p>
+            <script>
+                const themeE = document.getElementById("theme");
+                let color = "white";
+                // REQUIRED, implement atleast 5 cases
+                function changeTheme() {
+                    let theme = themeE.value;
+                    switch (theme) {
+                        case "warm":
+                            color = "yellow";
+                            break;
+                        case "cool":
+                            color = "blue";
+                            break;
+                        case "hot":
+                            color = "orange";
+                            break;
+                        case "really hot":
+                            color = "red";
+                            break;
+                        case "dark":
+                            color = "black";
+                            break;
+                        case "nature":
+                            color = "green";
+                            break;
+                        case "purp":
+                            color = "purple";
+                            break;
+                        default:
+                            color = "white";
+                            break;
+                    }
+                    document.body.style.backgroundColor = color;
+                }
 
+                // event --- action
+                themeE.addEventListener("blur", changeTheme, false);
+
+            </script>
         </div>
 
 
@@ -251,16 +355,73 @@
                     <option> 30-34 </option>
                     <option> 35-39</option>
                     <option> 40-44 </option>
-
+                    <option> 45 to 49 </option>
+                    <option> 50 to 54 </option>
+                    <option> 55 to 59 </option>
+                    <option> 60 to 64 </option>
                 </select>
 
             </p>
             <p>
-                <input type="button" value="Check Premium">
+                <input type="button" value="Check Premium" id="checkpremiumbutton">
             </p>
             <p id="premiumresult">
 
             </p>
+
+            <script>
+                const radioButtons = document.getElementsByName('coverage');
+                
+                let ageFactor = null;
+                function calcPremium() {
+                    var ageIndex = $('#agegroup')[0].selectedIndex;
+                    let coverageSelected = null;
+                    for (const radio of radioButtons) {
+                        console.log("Debug: " + radio.value);
+                        if (radio.checked) {
+                           coverageSelected = radio.value;
+                            break; // Exit loop once found
+                        }
+                    }
+
+                    switch(ageIndex) {
+                        case 0:
+                            ageFactor = 0.08;
+                            break;
+                        case 1:
+                            ageFactor = 0.09;
+                            break;
+                        case 2:
+                            ageFactor = 0.11;
+                            break;
+                        case 3:
+                            ageFactor = 0.17;
+                            break;
+                        case 4:
+                            ageFactor = 0.29;
+                            break;
+                        case 5:
+                            ageFactor = 0.48;
+                            break;
+                        case 6:
+                            ageFactor = 0.75;
+                            break;
+                        case 7:
+                            ageFactor = 1.17;
+                            break;
+                        default:
+                            ageFactor = null;
+                            break;
+                    }
+                    console.log("DEBUG: ageFactor = " + ageFactor);
+                    let premium = ageFactor*coverageSelected;
+                    console.log("Premium calculated: " + premium);
+                    document.getElementById("premiumresult").textContent = "Premium is " + premium;
+                }
+
+                document.getElementById("checkpremiumbutton").addEventListener('click', calcPremium, false);
+
+            </script>
 
         </div>
 
@@ -358,9 +519,9 @@
             <div class="img-container-hide">
                 <img src="img/usca5.jpg" alt="usca">
             </div>
-			<script>
-				
-			</script>
+            <script>
+
+            </script>
 
 
         </div>
@@ -402,10 +563,10 @@
 
 
         <div class="practice">
-            <h1>  HTML Canvas </h1>
+            <h1> HTML Canvas </h1>
             <canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
-                    Your browser does not support the HTML5 canvas tag.</canvas>
-            <div id="drawing">  </div>
+                Your browser does not support the HTML5 canvas tag.</canvas>
+            <div id="drawing"> </div>
             <p> Some P5.js examples </p>
             <script src="https://cdn.jsdelivr.net/npm/p5@1/lib/p5.min.js"></script>
             <script src="js/draw.js"></script>
