@@ -371,20 +371,20 @@
 
             <script>
                 const radioButtons = document.getElementsByName('coverage');
-                
+                // Could also do document.querySelector('input[name="coverage"]:checked') instead of what I did, but if it aint broke I aint fixing it
                 let ageFactor = null;
                 function calcPremium() {
                     var ageIndex = $('#agegroup')[0].selectedIndex;
                     let coverageSelected = null;
                     for (const radio of radioButtons) {
-                        console.log("Debug: " + radio.value);
+                        // console.log("Debug: " + radio.value);
                         if (radio.checked) {
-                           coverageSelected = radio.value;
+                            coverageSelected = radio.value;
                             break; // Exit loop once found
                         }
                     }
 
-                    switch(ageIndex) {
+                    switch (ageIndex) {
                         case 0:
                             ageFactor = 0.08;
                             break;
@@ -414,7 +414,8 @@
                             break;
                     }
                     console.log("DEBUG: ageFactor = " + ageFactor);
-                    let premium = ageFactor*coverageSelected;
+                    const base = 10;
+                    let premium = base + (ageFactor * (coverageSelected/1000));
                     console.log("Premium calculated: " + premium);
                     document.getElementById("premiumresult").textContent = "Premium is " + premium;
                 }
