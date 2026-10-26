@@ -436,6 +436,9 @@
             <p>
                 <input type="button" value="Click for Square">
             </p>
+            <script>
+                // OPTIONAL
+            </script>
 
         </div>
 
@@ -453,7 +456,33 @@
 
 
             </div>
+            <script>
+                function runTable() {
+                    let multInput = document.getElementById("inputnumber2").value;
+                    multInput ++;
+                    let result = "";
+                    result += "<table>";
 
+                    for(let i=0; i<multInput; i++)
+                    {
+                        result += "<tr>";
+                        for(let j=0; j<multInput; j++)
+                        {
+                            result += "<td>";
+                            let product = i*j;
+                            result += " " + i + " " + "*" + " " + j + " = " + product;
+                            result += "</td>";
+                        }
+                        result += "</tr>";
+                    }
+
+                    result += "</table>";
+
+                    document.getElementById("loopoutput").innerHTML = result;
+                }
+
+                document.querySelector("input[value='Click for multiplication table']").addEventListener('click', runTable);
+            </script>
         </div>
 
 
