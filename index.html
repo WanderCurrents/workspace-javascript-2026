@@ -528,6 +528,27 @@
                     <td id="r6"></td>
                 </tr>
             </table>
+            <script>
+                //Array practice
+                const numbers = [0,1,2,3,4,5,6];
+
+                // Messing around with arrays
+                numbers.push(100);
+                console.log(numbers);
+                numbers.pop();
+                console.log(numbers);
+                console.log(numbers[0]);
+                console.log("changing a number out of bounds");
+                numbers[100]="new number";
+                console.log(numbers);
+                numbers["k"] = "tyy";
+
+                for(var i in numbers) {
+                    console.log("key " + i + "\t\tvalue " + numbers[i]);
+                }
+                numbers.forEach(e => console.log(e));
+            
+            </script>
 
         </div>
 
