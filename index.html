@@ -415,7 +415,7 @@
                     }
                     console.log("DEBUG: ageFactor = " + ageFactor);
                     const base = 10;
-                    let premium = base + (ageFactor * (coverageSelected/1000));
+                    let premium = base + (ageFactor * (coverageSelected / 1000));
                     console.log("Premium calculated: " + premium);
                     document.getElementById("premiumresult").textContent = "Premium is " + premium;
                 }
@@ -459,17 +459,15 @@
             <script>
                 function runTable() {
                     let multInput = document.getElementById("inputnumber2").value;
-                    multInput ++;
+                    multInput++;
                     let result = "";
                     result += "<table>";
 
-                    for(let i=0; i<multInput; i++)
-                    {
+                    for (let i = 0; i < multInput; i++) {
                         result += "<tr>";
-                        for(let j=0; j<multInput; j++)
-                        {
+                        for (let j = 0; j < multInput; j++) {
                             result += "<td>";
-                            let product = i*j;
+                            let product = i * j;
                             result += " " + i + " " + "*" + " " + j + " = " + product;
                             result += "</td>";
                         }
@@ -507,7 +505,7 @@
         <div class="practice">
             <h1>Change Attribute -- Rolling a dice </h1>
             <p> <input type="button" id="roll" value="roll" /> </p>
-            <p> <img src="img/die1.png"> </p>
+            <p> <img id="die-img" src="img/die1.png"> </p>
             <table>
                 <tr>
                     <th>Result</th>
@@ -530,24 +528,85 @@
             </table>
             <script>
                 //Array practice
-                const numbers = [0,1,2,3,4,5,6];
+                // const numbers = [0,1,2,3,4,5,6];
 
                 // Messing around with arrays
-                numbers.push(100);
-                console.log(numbers);
-                numbers.pop();
-                console.log(numbers);
-                console.log(numbers[0]);
-                console.log("changing a number out of bounds");
-                numbers[100]="new number";
-                console.log(numbers);
-                numbers["k"] = "tyy";
+                // numbers.push(100);
+                // console.log(numbers);
+                // numbers.pop();
+                // console.log(numbers);
+                // console.log(numbers[0]);
+                // console.log("changing a number out of bounds");
+                // numbers[100]="new number";
+                // console.log(numbers);
+                // numbers["k"] = "tyy";
 
-                for(var i in numbers) {
-                    console.log("key " + i + "\t\tvalue " + numbers[i]);
+                // for(var i in numbers) {
+                //     console.log("key " + i + "\t\tvalue " + numbers[i]);
+                // }
+                // numbers.forEach(e => console.log(e));
+                //--PRACTICE ABOVE--
+
+                const btnE = document.querySelector('#roll');
+                const dieImgE = document.querySelector('#die-img');
+                const stat = [0,0,0,0,0,0];
+                function rollPic() {
+                    let result = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+                    stat[result-1]++;   //Increments in the 0-indexed array
+                    // console.log(result);
+                    //My less-than-ideal solution for this
+                    // switch (result) {
+                    //     case 1:
+                    //         dieImgE.setAttribute('src', 'img/die1.png');
+                    //         break;
+                    //     case 2:
+                    //         dieImgE.setAttribute('src', 'img/die2.png');
+                    //         break;
+                    //     case 3:
+                    //         dieImgE.setAttribute('src', 'img/die3.png');
+                    //         break;
+                    //     case 4:
+                    //         dieImgE.setAttribute('src', 'img/die4.png');
+                    //         break;
+                    //     case 5:
+                    //         dieImgE.setAttribute('src', 'img/die5.png');
+                    //         break;
+                    //     case 6:
+                    //         dieImgE.setAttribute('src', 'img/die6.png');
+                    //         break;
+                    //     default:
+                    //         dieImgE.setAttribute('src', 'img/die1.png');
+                    // }
+
+                    //Actual Solution
+                    let imgname = "img/" + "die" + result +".png";
+                    dieImgE.setAttribute('src', imgname);
+
+
+                    //--Updating Stats
+                    // My implementation
+                    // for(let i=0; i<stat.length; i++) {
+                    //     let rID = "r" + (i+1);
+                    //     document.getElementById(rID).textContent = stat[i].toString();
+                    // }
+
+                    //Better implementation
+                    document.getElementById("r"+result).textContent = stat[result-1].toString();
+                    
+
+                    // OPTIONAL
+                    dieImgE.setAttribute('style', 'transform: rotate(0deg) scale(1)');
+                    dieImgE.animate([
+                        {transform: 'rotateZ(0deg) scale(1)'},
+                        {transform: 'rotateZ(360deg) scale('+result+')'},
+                        {transform: 'rotateZ(0deg) scale(1)'}
+                    ],
+                    {duration: 1000 , iterations:1}   
+                    );
                 }
-                numbers.forEach(e => console.log(e));
-            
+                btnE.addEventListener('click', rollPic);
+
+
             </script>
 
         </div>
@@ -571,7 +630,20 @@
                 <img src="img/usca5.jpg" alt="usca">
             </div>
             <script>
-
+                // const bannerList = document.getElementsByClassName("img-container-hide");
+                const bannerList = document.querySelectorAll(".img-container-hide");
+                let imgIndex = 0;
+                function swapBanner() {
+                    // console.log(imgIndex);
+                    bannerList[imgIndex].setAttribute('class', 'img-container-hide');
+                    if(imgIndex == bannerList.length-1) {
+                        imgIndex = 0;
+                    } else {
+                        imgIndex++;
+                    }
+                    bannerList[imgIndex].setAttribute('class', 'img-container');
+                }
+                setInterval(swapBanner, 3000);
             </script>
 
 
